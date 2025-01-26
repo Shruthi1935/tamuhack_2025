@@ -38,7 +38,7 @@ const Login = () => {
                 </div>
 
                 <button type="submit" className="p-2 font-chillax bg-[#311460] text-purple-200 rounded-full w-[38%] mt-8 text-base font-bold transform transition-transform duration-300 hover:scale-105">
-                    Create Account
+                    <Link href="/frontendPages/chatbotPage"> Create Account </Link>
                 </button>
 
                 <div className="font-chillax font-medium text-[#311460] pt-8"> 
