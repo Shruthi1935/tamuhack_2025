@@ -38,6 +38,19 @@ const splitter = new RecursiveCharacterTextSplitter({
     chunkOverlap: 100
 })
 
+const scrapePage = async (url: string): Promise<string> => {
+    // Create an instance of PuppeteerWebBaseLoader
+    const loader = new PuppeteerWebBaseLoader(url, {
+      launchOptions: { headless: true }, // Puppeteer-specific launch options
+    });
+
+    // Use the loader to load the content of the page
+    const docs = await loader.load();
+
+    // Return the combined content of all loaded documents
+    return docs.map((doc) => doc.pageContent).join("\n");
+};
+
 const createCollection = async(similarityMetric: SimilarityMetric = "dot_product") => {
     const res = await db.createCollection(ASTRA_DB_COLLECTION, {
         vector: {
@@ -51,5 +64,17 @@ const createCollection = async(similarityMetric: SimilarityMetric = "dot_product
 
 const loadSampleData = async () => {
     const collection = await db.collection(ASTRA_DB_COLLECTION)
-    
+    for await(const url of my_next_app_data){
+        const content  = await scrapePage(url)
+        const chunks = await splitter.splitText(content)
+
+        for await (const chunk of chunks){
+            const embedding = await openai.embeddings.create({
+                model: "text-embedding-3-small",
+                input: chunk,
+                encoding_format: "float"
+            })
+        }
+
+    }
 }
