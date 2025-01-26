@@ -7,7 +7,13 @@ export default function Home() {
   return (
     <BackgroundGradientAnimation>
       
-      <Image src="/elephant.png" className="h-6 w-6" width={24} height={24}/>
+      <Image
+        src="/elephant.png"
+        alt="Ellie the elephant logo"
+        className="m-4"
+        width={64}
+        height={64}
+      />
 
       <div className="absolute z-50 inset-0 flex items-center justify-center text-center px-4">
         <div className="flex flex-col space-y-10 text-center items-center">
