@@ -26,14 +26,15 @@ export default function ChatbotPage() {
   };
 
   return (
+    <BackgroundGradientAnimation>
     <section className="bg-[#15072e] min-h-screen flex justify-center items-center">
       <div className="flex flex-col space-y-12">
-        <div className="text-purple-200 font-chillax font-medium text-6xl">
-          Hey, I'm your companion!
+        <div className="text-purple-200 font-chillax font-medium text-6xl leading-relaxed">
+          Hey, I'm Ellie! <br/> How can I assist you?
         </div>
         <div className="bg-purple-200 shadow-lg rounded-3xl w-full max-w-3xl p-6 flex flex-col space-y-4">
           {/* Chat History */}
-          <div className="flex-1 font-chillax overflow-y-auto space-y-4 p-4 bg-purple-200 rounded-xl">
+          <div className="flex-1 font-chillax overflow-y-auto space-y-4 p-4 bg-purple-200 rounded-xl" style={{ maxHeight: "calc(100vh - 250px)" }}>
             {messages.map((message, index) => (
               <div
                 key={index}
@@ -44,7 +45,7 @@ export default function ChatbotPage() {
                 <div
                   className={`${
                     message.sender === "user" ? "bg-purple-300" : "bg-purple-300"
-                  } text-[#15072e] font-medium px-4 py-2 rounded-full max-w-xs text-md`}
+                  } text-[#15072e] font-medium px-4 py-2 rounded-full text-md`}
                 >
                   {message.text}
                 </div>
@@ -71,5 +72,6 @@ export default function ChatbotPage() {
         </div>
       </div>
     </section>
+    </BackgroundGradientAnimation>
   );
 }
